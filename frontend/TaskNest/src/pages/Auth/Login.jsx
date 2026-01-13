@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import {useNavigate} from 'react-router-dom';
+import Input from "../../components/Inputs/Input";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,16 @@ const Login = () => {
       <p className="text-xs text-slate-700 mt-[5px] mb-6">
         Please enter your details to log in
       </p>
+
+      <form onSubmit={handleLogin}>
+        <Input
+          value={email}
+          onChange={({ target }) => setEmail(target.value)}
+          label="Email Address"
+          placeholder="test@example.com"
+          type="text"
+          />
+      </form>
     </div>
   </AuthLayout>;
 };
