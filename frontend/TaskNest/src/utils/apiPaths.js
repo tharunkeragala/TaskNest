@@ -7,7 +7,6 @@ export const API_PATHS = {
     REGISTER: "/api/auth/register",          // Register a new user (Admin or Member)
     LOGIN: "/api/auth/login",                // Authenticate user & return JWT token
     GET_PROFILE: "/api/auth/profile",        // Get logged-in user details
-    UPLOAD_IMAGE: "/api/auth/upload-image",  // Upload profile image
   },
 
   USERS: {
@@ -36,4 +35,8 @@ export const API_PATHS = {
     EXPORT_TASKS: "/api/reports/export/tasks", // Export tasks as Excel
     EXPORT_USERS: "/api/reports/export/users", // Export users report
   },
+
+  IMAGE: {
+    UPLOAD_IMAGE: "api/auth/upload-image",
+  }
 };
