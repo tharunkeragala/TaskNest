@@ -18,14 +18,14 @@ const SignUp = () => {
 
   const [error, setError] = useState(null);
 
-  const {updateUser} = useContext(UserContext)
+  const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   //Handle SignUp form submit
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    let profileImageUrl = ''
+    let profileImageUrl = "";
 
     if (!fullName) {
       setError("Please enter full name.");
@@ -46,7 +46,6 @@ const SignUp = () => {
 
     //SignUp API Call
     try {
-
       //Upload image if present
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
@@ -58,10 +57,10 @@ const SignUp = () => {
         email,
         password,
         profileImageUrl,
-        adminInviteToken
+        adminInviteToken,
       });
 
-      const { token , role } = response.data;
+      const { token, role } = response.data;
 
       if (token) {
         localStorage.setItem("token", token);
@@ -74,7 +73,7 @@ const SignUp = () => {
           navigate("/user/dashboard");
         }
       }
-    } catch (error){
+    } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
       } else {
@@ -85,62 +84,69 @@ const SignUp = () => {
 
   return (
     <AuthLayout>
-      <div className="lg:w-full h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Create an Account</h3>
-        <p className="text-xs text-slate-700 mt-1.5 mb-6">
-          Join us today by entering your details below.
-        </p>
-
-        <form onSubmit={handleSignUp}>
-          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              value={fullName}
-              onChange={({ target }) => setFullName(target.value)}
-              label={"Full Name"}
-              placeholder={"John"}
-              type="text"
-            />
-
-            <Input
-              value={email}
-              onChange={({ target }) => setEmail(target.value)}
-              label="Email Address"
-              placeholder="test@example.com"
-              type="text"
-            />
-
-            <Input
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-              label="Password"
-              placeholder="Min 8 Characters"
-              type="password"
-            />
-
-            <Input
-              value={adminInviteToken} 
-              onChange={({ target }) => setAdminInviteToken(target.value)} 
-              label="Admin Invite Token"
-              placeholder="6 Digit Code"
-              type="text"
-            />
-          </div>
-
-          {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
-
-          <button type="submit" className="btn-primary">
-            SignUp
-          </button>
-
-          <p className="text-[13px] text-slate-800 mt-3">
-            Already have an account?{" "}
-            <Link className="font-medium text-primary underline" to="/login">
-              Login
-            </Link>
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8">
+          <h3 className="text-2xl font-semibold text-gray-900">
+            Create an Account
+          </h3>
+          <p className="text-sm text-gray-500 mt-1.5 mb-6">
+            Join us today by entering your details below.
           </p>
-        </form>
+
+          <form onSubmit={handleSignUp}>
+            <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Input
+                value={fullName}
+                onChange={({ target }) => setFullName(target.value)}
+                label="Full Name"
+                placeholder="John"
+                type="text"
+              />
+
+              <Input
+                value={email}
+                onChange={({ target }) => setEmail(target.value)}
+                label="Email Address"
+                placeholder="test@example.com"
+                type="text"
+              />
+
+              <Input
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+                label="Password"
+                placeholder="Min 8 Characters"
+                type="password"
+              />
+
+              <Input
+                value={adminInviteToken}
+                onChange={({ target }) => setAdminInviteToken(target.value)}
+                label="Admin Invite Token"
+                placeholder="6 Digit Code"
+                type="text"
+              />
+            </div>
+
+            {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
+
+            <button type="submit" className="w-full btn-primary mt-4">
+              Sign Up
+            </button>
+
+            <p className="text-sm text-gray-700 text-center mt-4">
+              Already have an account?{" "}
+              <Link
+                className="font-medium text-primary hover:underline"
+                to="/login"
+              >
+                Login
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </AuthLayout>
   );
