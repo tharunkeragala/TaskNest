@@ -79,7 +79,7 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
               )}
 
               <div className="flex-1">
-                <p className="font-medium text-gray-800 dark:text-white">
+                <p className="font-medium text-gray-800 text-gray-200">
                   {user.name}
                 </p>
                 <p className="text-[13px] text-gray-500">{user.email}</p>
