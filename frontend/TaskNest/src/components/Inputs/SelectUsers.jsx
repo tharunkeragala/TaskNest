@@ -3,6 +3,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { LuUser } from "react-icons/lu";
 import Modal from "../Modal";
+import AvatarGroup from "../AvatarGroup";
+import { DEFAULT_AVATAR } from "../../constants/images";
 
 const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
   const [allUsers, setAllUsers] = useState([]);
@@ -34,8 +36,8 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
   };
 
   const selectedUserAvatars = allUsers
-    .filter((user) => selectedUsers.includes(user._id))
-    .map((user) => user.profileImageUrl);
+  .filter((user) => selectedUsers.includes(user._id))
+  .map((user) => user.profileImageUrl || DEFAULT_AVATAR);
 
   useEffect(() => {
     getAllUsers();
@@ -55,12 +57,18 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
         </button>
       )}
 
+      {selectedUserAvatars.length > 0 && (
+        <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
+          <AvatarGroup avatars={selectedUserAvatars} maxVisible={3} />
+          </div>
+      )}
+
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="Select Users"
       >
-        <div className="space-y-4 h-[60vh] overflow-y-auto">
+        <div className="space-y-4 h-[30vh] overflow-y-auto">
           {allUsers.map((user) => (
             <div
               key={user._id}
@@ -79,7 +87,7 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
               )}
 
               <div className="flex-1">
-                <p className="font-medium text-gray-800 text-gray-200">
+                <p className="font-medium text-gray-800">
                   {user.name}
                 </p>
                 <p className="text-[13px] text-gray-500">{user.email}</p>
