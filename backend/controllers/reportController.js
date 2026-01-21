@@ -39,11 +39,11 @@ const exportTasksReport = async (req, res) => {
 
     res.setHeader (
         "Content-Type",
-        "application/vnd.openxmlformats-officedocuements.spreadsheetml.sheet"
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     );
     res.setHeader(
         "Content-Disposition",
-        'attachement; filename="tasks_report.xlsx"'
+        'attachment; filename="tasks_report.xlsx"'
     );
 
     return workbook.xlsx.write(res).then(() => {
@@ -69,7 +69,7 @@ const exportUserReport = async (req, res) => {
 
     const userTaskMap = {};
     users.forEach ((user) => {
-        userTaskMap[user.id] = {
+        userTaskMap[user._id] = {
             name: user.name,
             email: user.email,
             taskCount: 0,
@@ -85,18 +85,18 @@ const exportUserReport = async (req, res) => {
                 if (userTaskMap[assignedUser._id]) {
                     userTaskMap[assignedUser._id].taskCount +=1;
                     if (task.status === "Pending") {
-                        userTaskMap[assignedsuer.id].pendingTasks +=1;
+                        userTaskMap[assignedUser._id].pendingTasks +=1;
                     } else if (task.status === "In Progress") {
-                        userTaskMap[assignedsuer.id].inProgressTasks +=1;
+                        userTaskMap[assignedUser._id].inProgressTasks +=1;
                     } else if (task.status === "Completed") {
-                        userTaskMap[assignedsuer.id].completedTasks +=1;
+                        userTaskMap[assignedUser._id].completedTasks +=1;
                     }
                 }
             });
         }
     });
 
-    const workbook = new excelJS.workbook();
+    const workbook = new excelJS.Workbook();
     const worksheet = workbook.addWorksheet("User Task Report");
 
     worksheet.columns = [
@@ -117,7 +117,8 @@ const exportUserReport = async (req, res) => {
     });
     res.setHeader(
         "Content-Disposition",
-        'attachment; filename="users_report.xlsx'
+        'attachment; filename="users_report.xlsx"'
+
     );
 
     return workbook.xlsx.write(res).then(() => {

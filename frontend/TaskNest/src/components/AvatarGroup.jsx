@@ -1,7 +1,7 @@
 import React from "react";
 import { DEFAULT_AVATAR } from "../constants/images";
 
-const AvatarGroup = ({ avatars = [], maxVisible = 3 }) => {
+const AvatarGroup = ({ avatars = [], maxVisible = 5 }) => {
   // Remove empty / invalid values
   const validAvatars = avatars.filter(Boolean);
 

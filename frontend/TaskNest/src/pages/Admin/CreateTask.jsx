@@ -351,7 +351,8 @@ const CreateTask = () => {
         onClose={() => setOpenDeleteAlert(false)}
         title="Delete Task"
       >
-        <DeleteAlert content="Are you sure you wamt to delete this task?"
+        <DeleteAlert 
+        content="Are you sure you want to delete this task?"
         onDelete={() => deleteTask()}
         />
       </Modal>
