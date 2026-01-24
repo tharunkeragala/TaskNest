@@ -101,6 +101,21 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
+
+            <p className="text-sm text-gray-700 text-center mt-4">
+              <h5>Admin : admin@tasknest.com</h5>
+            </p>
+            <p className="text-sm text-gray-700 text-center mt-4">
+              <h5>User : user@tasknest.com</h5>
+            </p>
+
+            <p className="text-sm text-gray-700 text-center mt-4">
+              <h5>Password : 12345678</h5>
+            </p>
+
+            <p className="text-sm text-gray-700 text-center mt-4">
+              <h5>Admin Token : 5061954</h5>
+            </p>
           </form>
         </div>
       </div>
